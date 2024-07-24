@@ -1,0 +1,32 @@
+
+```
+import re
+
+def assess_password_strength(password):
+    length_points = max(0, len(password) - 12)
+    complexity_points = 0
+    if re.search(r"[A-Z]", password):
+        complexity_points += 1
+    if re.search(r"[a-z]", password):
+        complexity_points += 1
+    if re.search(r"\d", password):
+        complexity_points += 1
+    if re.search(r"\W", password):
+        complexity_points += 1
+    uniqueness_points = 0
+    if not re.search(r"qwerty|123456", password):
+        uniqueness_points += 1
+    if password not in previously_used_passwords:
+        uniqueness_points += 1
+    total_points = length_points + complexity_points + uniqueness_points
+    if total_points < 3:
+        return "Weak"
+    elif total_points < 6:
+        return "Medium"
+    elif total_points < 9:
+        return "Strong"
+    else:
+        return "Very Strong"
+
+previously_used_passwords = []  # store previously used passwords for uniqueness check
+```
